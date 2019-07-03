@@ -13,10 +13,10 @@ Exemple d'appel HTTP : http://api.openweathermap.org/data/2.5/weather?q=Paris&un
 
 class MeteoWidgetElement extends HTMLElement {
 
-    constructor(){
+    constructor() {
         super();
-        
-        this.attachShadow({mode: 'open'});
+
+        this.attachShadow({ mode: 'open' });
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -45,11 +45,11 @@ class MeteoWidgetElement extends HTMLElement {
         `
     }
 
-    capitalize(str){
+    capitalize(str) {
         return str.split(' ').map(mot => mot[0].toUpperCase() + mot.slice(1)).join(' ');
     }
 
-    fetchAPIData(){
+    fetchAPIData() {
         fetch(`http://api.openweathermap.org/data/2.5/weather?q=${this._city}&units=${this._units}&lang=${this._lang}&appid=8e602b9ea28ed4f9f8fc97a5f6d1105c`)
             .then(response => response.json())
             .then(json => {
@@ -61,7 +61,7 @@ class MeteoWidgetElement extends HTMLElement {
             })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._city = this.getAttribute('city') || 'Paris';
         this._units = this.getAttribute('units') || 'metric';
         this._lang = this.getAttribute('lang') || 'fr';
@@ -70,9 +70,9 @@ class MeteoWidgetElement extends HTMLElement {
 
         this.fetchAPIData();
     }
-    
-    render(){
-        if(this._dark){
+
+    render() {
+        if (this._dark) {
             this.shadowRoot.querySelector('div.meteo-widget').classList.add('dark');
         }
 
@@ -81,7 +81,7 @@ class MeteoWidgetElement extends HTMLElement {
         this.shadowRoot.querySelector('h2').textContent = this._city;
 
         this.shadowRoot.querySelector('h3 #temperature').textContent = this._temperature + (this._units == 'metric' ? ' C°' : ' F°');
-        
+
         this.shadowRoot.querySelector('h3 #description').textContent = this.capitalize(this._description);
     }
 }

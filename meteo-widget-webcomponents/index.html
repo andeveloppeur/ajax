@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Faites connaissance avec les WebComponents</title>
 </head>
+
 <body>
     <h1>Créons un composant user-card !</h1>
     <h2>Ce h2 n'est là que pour vous montrer le problème de CSS Bleeding et l'utilité du ShadowDOM</h2>
@@ -14,7 +16,7 @@
         - first-name="..." => Représente le prénom de l'utilisateur
         - last-name="..." => Représente le nom de l'utilisateur
         - avatar-url="" => Représente la photo de l'utilisateur -->
-    
+
     <user-card first-name="Lior" last-name="Chamla" avatar-url="https://avatars.io/twitter/LiiorC">
         <a href="#" slot="links">Email</a>
         <a href="#" slot="links">Voir le site</a>
@@ -35,5 +37,18 @@
             console.log("L'image a été clickée", event);
         })
     </script>
+    <script>
+        (async function ok() {
+            var reponse;
+            var json;
+            var ip;
+            var ip = await fetch(`http://api.ipify.org?format=json`)
+                .then(reponse => reponse.json())
+                .then(json => json.ip)
+            console.log(ip);
+
+        })()
+    </script>
 </body>
+
 </html>
